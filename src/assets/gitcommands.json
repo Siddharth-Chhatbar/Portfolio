@@ -1,0 +1,32 @@
+{
+  "projects": [
+    {
+      "title": "Shreeji Chikki Inventory Management and Dashboard",
+      "description": "A user-friendly web application for inventory management and sales tracking.",
+      "technologies": [
+        "Python",
+        "TypeScript",
+        "React",
+        "Tailwind CSS",
+        "Django",
+        "Figma"
+      ],
+      "link": "https://github.com/Siddharth-Chhatbar/Shreeji-Chikki",
+      "summary": "Designed the user interface using Figma and built a full-stack web application to streamline inventory management and sales tracking for Shreeji Chikki. Developed a comprehensive dashboard providing insights into sales, deliveries, and purchases. Implemented efficient tools for managing inventory, orders, and suppliers."
+    },
+    {
+      "title": "Shiganshina Social University Project",
+      "description": "A full-stack social media application.",
+      "technologies": ["Python", "Django", "ReactJS"],
+      "link": "https://github.com/cmput402/group-project-402wednesday7",
+      "summary": "Collaborated with a team to design and develop a full-stack social media application using Django and ReactJS. Built a robust RESTful API, implemented secure user authentication, and leveraged GitHub Actions for TDD and CI/CD. Automated deployment to Heroku and created API documentation using Swagger."
+    },
+    {
+      "title": "UniONE Dashboard University Project",
+      "description": "A comprehensive dashboard for student availability, managing student businesses and events within the UniONE ecosystem.",
+      "technologies": ["TypeScript", "Figma", "React", "TailwindCSS", "Django"],
+      "link": "https://github.com/UAlberta-CMPUT401/f23project-unione-dashboard",
+      "summary": "Designed the user interface using Figma and collaborated with a team to develop a comprehensive dashboard using React, TailwindCSS, and Django. Created admin and user tools for the dashboard. Implemented interactive graphs to visualize student availability and manage student businesses and events within the UniONE ecosystem. Leveraged GitHub Actions for TDD and CI/CD, and managed project workflow using GitHub Projects."
+    }
+  ]
+}
