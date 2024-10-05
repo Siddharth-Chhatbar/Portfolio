@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useReducer } from "react";
 import GitCommand from "./../components/GitCommand";
 import ManCommand from "./../components/ManCommand";
 import ContactCommand from "./../components/ContactCommand";
@@ -8,78 +8,85 @@ import UnknownCommand from "../components/UnknownCommand";
 import LinksCommand from "../components/LinksCommand";
 import ResumeCommand from "../components/ResumeCommand";
 
+type TerminalCommandState = JSX.Element[];
+// type TerminalCommandActionType = 'git' | 'man' | 'contact' | 'about' | 'clear' | 'link' | 'resume';
+type GitAction = {
+  type: "git";
+};
+type ManAction = {
+  type: "man";
+};
+type ContactAction = {
+  type: "contact";
+};
+type AboutAction = {
+  type: "about";
+};
+type ClearAction = {
+  type: "clear";
+};
+type LinkAction = {
+  type: "link";
+};
+type ResumeAction = {
+  type: "resume";
+};
+type UnknownAction = {
+  type: string;
+};
+
+// Union of all actions
+type TerminalCommandAction =
+  | GitAction
+  | ManAction
+  | ContactAction
+  | AboutAction
+  | ClearAction
+  | LinkAction
+  | ResumeAction
+  | UnknownAction;
+// type TerminalCommandAction = { type: TerminalCommandActionType };
+const reducer = (
+  state: TerminalCommandState,
+  action: TerminalCommandAction,
+) => {
+  switch (action.type) {
+    case "git":
+      return [...state, GitCommand()];
+    case "about":
+      return [...state, AboutCommand()];
+    case "clear":
+      return [];
+    case "contact":
+      return [...state, ContactCommand()];
+    case "link":
+      return [...state, LinksCommand()];
+    case "man":
+      return [...state, ManCommand()];
+    case "resume":
+      return [...state, ResumeCommand()];
+    default:
+      return [...state, UnknownCommand(action.type)];
+  }
+};
+
+const EmptyState: JSX.Element[] = [ClearCommand()];
 const useTerminalCommands = () => {
-  const [output, setOutput] = useState<JSX.Element[]>([]);
-  const [isCleared, setIsCleared] = useState(false); // Track if the screen is cleared
+  const [state, dispatch] = useReducer(reducer, []);
+  const output = state.length === 0 ? EmptyState : state;
 
-  const handleCommand = (command: string) => {
-    const [cmd] = command.trim().split(" ");
+  const handleCommand = useCallback(
+    (command: string) => {
+      console.log('Command Called:', command);
+      dispatch({ type: command });
+    },
+    [dispatch],
+  );
 
-    switch (cmd.toLowerCase()) {
-      case "git":
-        if (!isCleared) {
-          setOutput((prev) => [...prev, GitCommand()]);
-        } else {
-          setOutput([GitCommand()]);
-          setIsCleared(false); // Reset cleared state
-        }
-        break;
-      case "man":
-        if (!isCleared) {
-          setOutput((prev) => [...prev, ManCommand()]);
-        } else {
-          setOutput([ManCommand()]);
-          setIsCleared(false); // Reset cleared state
-        }
-        break;
-      case "contact":
-        if (!isCleared) {
-          setOutput((prev) => [...prev, ContactCommand()]);
-        } else {
-          setOutput([ContactCommand()]);
-          setIsCleared(false); // Reset cleared state
-        }
-        break;
-      case "about":
-        if (!isCleared) {
-          setOutput((prev) => [...prev, AboutCommand()]);
-        } else {
-          setOutput([AboutCommand()]);
-          setIsCleared(false); // Reset cleared state
-        }
-        break;
-      case "resume":
-        if (!isCleared) {
-          setOutput((prev) => [...prev, ResumeCommand()]);
-        } else {
-          setOutput([ResumeCommand()]);
-          setIsCleared(false); // Reset cleared state
-        }
-        break;
-
-      case "link":
-        if (!isCleared) {
-          setOutput((prev) => [...prev, LinksCommand()]);
-        } else {
-          setOutput([LinksCommand()]);
-          setIsCleared(false); // Reset cleared state
-        }
-        break;
-      case "clear":
-        setOutput([ClearCommand()]);
-        setIsCleared(true); // Mark as cleared
-        break;
-      default:
-        if (!isCleared) {
-          setOutput((prev) => [...prev, UnknownCommand(cmd)]);
-        } else {
-          setOutput([UnknownCommand(cmd)]);
-          setIsCleared(false); // Reset cleared state
-        }
-    }
+  return {
+    output,
+    handleCommand,
   };
-
-  return { output, handleCommand };
 };
 
 export default useTerminalCommands;

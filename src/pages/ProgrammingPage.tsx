@@ -5,7 +5,6 @@ const ProgrammingPage = () => {
   const [inputValue, setInputValue] = useState("");
   const { output, handleCommand } = useTerminalCommands();
   const outputRef = useRef<HTMLDivElement>(null); // Ref for the output container
-  let initial: boolean = false;
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -14,21 +13,21 @@ const ProgrammingPage = () => {
     }
   };
 
-  const renderAbout = () => {
-    if (!initial) {
-      handleCommand("about");
-    }
-    initial = true;
-  };
-
   useEffect(() => {
-    renderAbout();
-  }, []);
+    handleCommand("about");
+
+    return () => {
+      handleCommand('clear');
+    }
+  }, [handleCommand]);
 
   // Scroll to the bottom of the output when new content is rendered
   useEffect(() => {
     if (outputRef.current) {
-      outputRef.current.scrollTop = outputRef.current.scrollHeight;
+      outputRef.current.scrollTo({
+        top: outputRef.current.scrollHeight,
+        behavior: "smooth",
+      });
     }
   }, [output]);
 
