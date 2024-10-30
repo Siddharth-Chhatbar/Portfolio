@@ -27,6 +27,13 @@
       "technologies": ["TypeScript", "Figma", "React", "TailwindCSS", "Django"],
       "link": "https://github.com/UAlberta-CMPUT401/f23project-unione-dashboard",
       "summary": "Designed the user interface using Figma and collaborated with a team to develop a comprehensive dashboard using React, TailwindCSS, and Django. Created admin and user tools for the dashboard. Implemented interactive graphs to visualize student availability and manage student businesses and events within the UniONE ecosystem. Leveraged GitHub Actions for TDD and CI/CD, and managed project workflow using GitHub Projects."
+    },
+    {
+      "title": "Multiplayer Pong Game Personal Project",
+      "description": "A classic Pong game with multiplayer functionality.",
+      "technologies": ["Python", "PyGame", "WebSockets"],
+      "link": "https://github.com/Siddharth-Chhatbar/Multiplayer-Pong",
+      "summary": "Developed a classic Pong game using Python and the PyGame library with multiplayer functionality enabled through WebSockets. Overcame challenges including independent paddle control for each player, synchronization of ball movement, and accurate score updates. The game ensures smooth synchronization of game state between clients to minimize latency and enable responsive gameplay."
     }
   ]
 }
